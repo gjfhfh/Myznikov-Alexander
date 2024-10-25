@@ -1,10 +1,10 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EnrichmentServiceTest {
     private EnrichmentService enrichmentService;
@@ -38,5 +38,40 @@ public class EnrichmentServiceTest {
         Map<String, String> enrichedContent = enrichedMessage.getContent();
         assertEquals("Vasya", enrichedContent.get("firstName"));
         assertEquals("Ivanov", enrichedContent.get("lastName"));
+    }
+
+    @Test
+    public void testEnrichmentWithoutMsisdn() {
+        Map<String, String> input = new HashMap<>();
+        input.put("action", "button_click");
+        input.put("page", "book_card");
+
+        Message message = new Message();
+        message.setContent(input);
+        message.setEnrichmentType(Message.EnrichmentType.MSISDN);
+
+        Message enrichedMessage = enrichmentService.enrich(message);
+
+        Map<String, String> enrichedContent = enrichedMessage.getContent();
+        assertNull(enrichedContent.get("firstName"));
+        assertNull(enrichedContent.get("lastName"));
+    }
+
+    @Test
+    public void testEnrichmentWithUnknownMsisdn() {
+        Map<String, String> input = new HashMap<>();
+        input.put("action", "button_click");
+        input.put("page", "book_card");
+        input.put("msisdn", "1234567890");
+
+        Message message = new Message();
+        message.setContent(input);
+        message.setEnrichmentType(Message.EnrichmentType.MSISDN);
+
+        Message enrichedMessage = enrichmentService.enrich(message);
+
+        Map<String, String> enrichedContent = enrichedMessage.getContent();
+        assertNull(enrichedContent.get("firstName"));
+        assertNull(enrichedContent.get("lastName"));
     }
 }
