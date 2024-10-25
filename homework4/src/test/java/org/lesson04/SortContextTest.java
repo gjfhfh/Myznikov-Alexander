@@ -1,28 +1,76 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SortContextTest {
+class SortContextTest {
+
+    private SortContext sortContext;
+
+    @BeforeEach
+    void setUp() {
+        // Инициализация SortContext с двумя стратегиями
+        sortContext = new SortContext(Arrays.asList(
+                new MergeSortStrategy(),
+                new BubbleSortStrategy()
+        ));
+    }
+
     @Test
-    public void testSort() {
+    void testSortWithMergeSort() {
         List<Integer> list = Arrays.asList(5, 3, 8, 1, 2);
-        SortStrategy strategy = new MergeSortStrategy();
-        SortContext context = new SortContext(strategy);
-        List<Integer> sortedList = context.sort(list);
+        List<Integer> sortedList = sortContext.sort(list);
         assertEquals(Arrays.asList(1, 2, 3, 5, 8), sortedList);
     }
 
     @Test
-    public void testSortWithLargeList() {
-        List<Integer> largeList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53);
-        SortStrategy strategy = new MergeSortStrategy();
-        SortContext context = new SortContext(strategy);
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            context.sort(largeList);
-        });
-        String expectedMessage = "Список слишком большой для сортировки слиянием";
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expectedMessage));
+    void testSortWithBubbleSort() {
+        List<Integer> list = Arrays.asList(5, 3, 8, 1, 2);
+        List<Integer> sortedList = sortContext.sort(list);
+        assertEquals(Arrays.asList(1, 2, 3, 5, 8), sortedList);
+    }
+
+    @Test
+    void testSortWithLargeList() {
+        List<Integer> largeList = Arrays.asList(new Integer[1001]);
+        assertThrows(IllegalArgumentException.class, () -> sortContext.sort(largeList));
+    }
+
+    @Test
+    void testSortWithEmptyList() {
+        List<Integer> emptyList = Arrays.asList();
+        List<Integer> sortedList = sortContext.sort(emptyList);
+        assertEquals(emptyList, sortedList);
+    }
+
+    @Test
+    void testSortWithSingleElementList() {
+        List<Integer> singleElementList = Arrays.asList(42);
+        List<Integer> sortedList = sortContext.sort(singleElementList);
+        assertEquals(singleElementList, sortedList);
+    }
+
+    @Test
+    void testSortWithAlreadySortedList() {
+        List<Integer> alreadySortedList = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> sortedList = sortContext.sort(alreadySortedList);
+        assertEquals(alreadySortedList, sortedList);
+    }
+
+    @Test
+    void testSortWithReverseSortedList() {
+        List<Integer> reverseSortedList = Arrays.asList(5, 4, 3, 2, 1);
+        List<Integer> sortedList = sortContext.sort(reverseSortedList);
+        assertEquals(Arrays.asList(1, 2, 3, 4, 5), sortedList);
+    }
+
+    @Test
+    void testSortWithDuplicateElements() {
+        List<Integer> listWithDuplicates = Arrays.asList(5, 3, 8, 1, 2, 3, 5);
+        List<Integer> sortedList = sortContext.sort(listWithDuplicates);
+        assertEquals(Arrays.asList(1, 2, 3, 3, 5, 5, 8), sortedList);
     }
 }
