@@ -96,7 +96,7 @@ public class ArticleController implements Controller {
 
   private void getAllArticles() {
     service.get(
-        "/api/articles",
+        "/api/all-articles",
         (Request request, Response response) -> {
           response.type("application/json");
           List<Article> articles = articleService.findAll();
@@ -119,7 +119,7 @@ public class ArticleController implements Controller {
 
   private void deleteArticle() {
     service.delete(
-        "/api/article/:articleId",
+        "/api/delete-article/:articleId",
         (Request request, Response response) -> {
           response.type("application/json");
           ArticleId articleId = new ArticleId(Long.parseLong(request.params("articleId")));
@@ -143,7 +143,7 @@ public class ArticleController implements Controller {
 
   private void updateArticle() {
     service.put(
-        "api/article/:articleId",
+        "api/update-article/:articleId",
         (Request request, Response response) -> {
           response.type("application/json");
           String body = request.body();
