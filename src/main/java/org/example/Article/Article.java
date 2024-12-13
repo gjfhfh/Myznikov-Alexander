@@ -22,57 +22,61 @@ public class Article {
         this.trending = comments.size() > 3;
     }
 
-  public Article withTitle(String title) {
-    return new Article(id, title, tags, comments);
-  }
-
-  public Article withTags(Set<String> tags) {
-    return new Article(id, title, tags, comments);
-  }
-
-  public Article withComments(List<Comment> comments) {
-    return new Article(id, title, tags, comments);
-  }
-
-  public ArticleId getId() {
-    return id;
-  }
-
-  public List<Comment> getComments() {
-    return comments;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public Set<String> getTags() {
-    return tags;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    public boolean isTrending() {
+        return trending; // Предполагается, что у вас есть поле trending
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    public Article withTitle(String title) {
+        return new Article(id, title, tags, comments);
     }
-    Article article = (Article) o;
-    return id.equals(article.id);
-  }
 
-  @Override
-  public int hashCode() {
-    return id.hashCode();
-  }
+    public Article withTags(Set<String> tags) {
+        return new Article(id, title, tags, comments);
+    }
 
-  @Override
-  public String toString() {
-    String sb = "ID = " + id.toString() + ", " +
-        "Title = " + title + ", " +
-        "Tags = " + tags + ", " +
-        "Comments = " + comments;
-    return sb;
-  }
+    public Article withComments(List<Comment> comments) {
+        return new Article(id, title, tags, comments);
+    }
+
+    public ArticleId getId() {
+        return id;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Article article = (Article) o;
+        return id.equals(article.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        String sb = "ID = " + id.toString() + ", " +
+                "Title = " + title + ", " +
+                "Tags = " + tags + ", " +
+                "Comments = " + comments;
+        return sb;
+    }
 }
