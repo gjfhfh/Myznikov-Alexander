@@ -1,43 +1,25 @@
 package org.example.Article;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.*;
-import org.example.Article.Request.ArticleCreateRequest;
-import org.example.Article.Request.ArticleUpdateRequest;
-import org.example.Article.Response.*;
 import org.example.Comment.CommentService;
-import org.example.Article.Exceptions.ArticleCreateException;
-import org.example.Article.Exceptions.ArticleFindException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-
-import java.util.ArrayList;
-
 public class ArticleController implements Controller {
-
-    private static final Logger LOG = LoggerFactory.getLogger(ArticleController.class);
 
     private final Service service;
     private final ArticleService articleService;
     private final CommentService commentService;
     private final ObjectMapper objectMapper;
-    private final ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository; // Объявление переменной
 
-    public ArticleController(Service service, ArticleService articleService, CommentService commentService, ObjectMapper objectMapper) {
+    public ArticleController(Service service, ArticleService articleService, CommentService commentService, ObjectMapper objectMapper, ArticleRepository articleRepository) {
         this.service = service;
         this.articleService = articleService;
         this.commentService = commentService;
         this.objectMapper = objectMapper;
-        this.articleRepository = articleRepository;
+        this.articleRepository = articleRepository; // Инициализация
     }
 
     @Override
