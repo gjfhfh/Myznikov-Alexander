@@ -30,8 +30,7 @@ public class Main {
                 service,
                 articleService,
                 commentService,
-                objectMapper,
-                inMemoryArticleRepository
+                objectMapper
         );
 
         CommentController commentController = new CommentController(
