@@ -7,27 +7,29 @@ import java.util.List;
 
 public interface ArticleRepository {
 
-  ArticleId generateId();
+    ArticleId generateId();
 
-  List<Article> findAll();
+    List<Article> findAll();
 
-  /**
-   * @throws ArticleNotFoundException
-   */
-  Article findById(ArticleId id);
+    /**
+     * @throws ArticleNotFoundException
+     */
+    Article findById(ArticleId id);
 
-  /**
-   * @throws ArticleIdDuplicatedException
-   */
-  void create(Article article);
+    /**
+     * @throws ArticleIdDuplicatedException
+     */
+    void create(Article article);
 
-  /**
-   * @throws ArticleNotFoundException
-   */
-  void update(Article article);
+    void createMultiple(List<Article> articles);
 
-  /**
-   * @throws ArticleNotFoundException
-   */
-  void delete(ArticleId id);
+    /**
+     * @throws ArticleNotFoundException
+     */
+    void update(Article article);
+
+    /**
+     * @throws ArticleNotFoundException
+     */
+    void delete(ArticleId id);
 }

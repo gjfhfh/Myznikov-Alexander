@@ -56,4 +56,11 @@ public class InMemoryArticleRepository implements ArticleRepository {
     }
     articlesMap.remove(id);
   }
+
+    @Override
+    public void createMultiple(List<Article> articles) {
+        for (Article article : articles) {
+            create(article); // Используем существующий метод create
+        }
+    }
 }
