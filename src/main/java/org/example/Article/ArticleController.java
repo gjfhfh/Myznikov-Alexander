@@ -24,21 +24,20 @@ import java.util.ArrayList;
 
 public class ArticleController implements Controller {
 
-
-    private final ArticleRepository articleRepository;
-
     private static final Logger LOG = LoggerFactory.getLogger(ArticleController.class);
 
     private final Service service;
     private final ArticleService articleService;
     private final CommentService commentService;
     private final ObjectMapper objectMapper;
+    private final ArticleRepository articleRepository;
 
     public ArticleController(Service service, ArticleService articleService, CommentService commentService, ObjectMapper objectMapper) {
         this.service = service;
         this.articleService = articleService;
         this.commentService = commentService;
         this.objectMapper = objectMapper;
+        this.articleRepository = articleRepository;
     }
 
     @Override
