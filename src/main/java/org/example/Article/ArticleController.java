@@ -39,7 +39,6 @@ public class ArticleController implements Controller {
         this.articleService = articleService;
         this.commentService = commentService;
         this.objectMapper = objectMapper;
-        this.articleRepository = articleRepository;
     }
 
     @Override
