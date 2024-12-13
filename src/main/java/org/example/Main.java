@@ -31,6 +31,7 @@ public class Main {
                 articleService,
                 commentService,
                 objectMapper,
+                inMemoryArticleRepository // Передаем репозиторий
         );
 
         CommentController commentController = new CommentController(
