@@ -24,6 +24,9 @@ import java.util.ArrayList;
 
 public class ArticleController implements Controller {
 
+
+    private final ArticleRepository articleRepository;
+
     private static final Logger LOG = LoggerFactory.getLogger(ArticleController.class);
 
     private final Service service;

@@ -23,6 +23,7 @@ public class Main {
     InMemoryCommentRepository inMemoryCommentRepository = new InMemoryCommentRepository();
     ArticleService articleService = new ArticleService(inMemoryArticleRepository, inMemoryCommentRepository);
     CommentService commentService = new CommentService(inMemoryCommentRepository, inMemoryArticleRepository);
+      ArticleController articleController = new ArticleController(service, articleService, commentService, objectMapper, articleRepository);
 
     Application application = new Application(
         List.of(
